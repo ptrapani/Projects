@@ -4,11 +4,11 @@ function InitializeGame() {
     window.playerTurn = 1;
     window.playerSymbol = "X";
     $(".square").text("");
-    $(".square").on("click", squareClickEvent);
+    $(".square").on("click", SquareClickEvent);
     $("#display-message").text("Player " + playerTurn + "'s Turn");
 }
 
-function squareClickEvent() {
+function SquareClickEvent() {
     if ($(this).text() === "") {
         if (playerTurn === 1) {
             $(this).text(playerSymbol);
@@ -39,68 +39,42 @@ function SwitchPlayer() {
     $("#display-message").text("Player " + playerTurn + "'s Turn");
 }
 
-
 function CheckWinner() {
-    var isGameOver = "false";
-    var NoWinner = "true";
     var winningCombo = playerSymbol + playerSymbol + playerSymbol;
 
     //Check horizontal
     if (winningCombo === $("#row1 .square").text() || winningCombo === $("#row2 .square").text() || winningCombo === $("#row3 .square").text()) {
-        isGameOver = "true";
-        NoWinner = "false";
-        DetermineNextTurn(isGameOver, NoWinner);
+        PlayerWon();
     }
-
 
     //Check vertical. 
     else if (winningCombo === $(".col1").text() || winningCombo === $(".col2").text() || winningCombo === $(".col3").text()) {
-        isGameOver = "true";
-        NoWinner = "false";
-        DetermineNextTurn(isGameOver, NoWinner);
+        PlayerWon();
     }
-
 
     //Check Diagonal
     else if (playerSymbol === $("#row1 .col1").text() && playerSymbol === $("#row2 .col2").text() && playerSymbol === $("#row3 .col3").text()) {
-        isGameOver = "true";
-        NoWinner = "false";
-        DetermineNextTurn(isGameOver, NoWinner);
+        PlayerWon();
     } else if (playerSymbol === $("#row1 .col3").text() && playerSymbol === $("#row2 .col2").text() && playerSymbol === $("#row3 .col1").text()) {
-        isGameOver = "true";
-        NoWinner = "false";
-        DetermineNextTurn(isGameOver, NoWinner);
+        PlayerWon();
     }
 
     //Board is full and nobody has won
     else if ($(".square").text().length === 9) {
-        isGameOver = "true";
-        NoWinner = "true";
-        DetermineNextTurn(isGameOver, NoWinner);
+        PlayersTied();
     } else {
-        DetermineNextTurn(isGameOver, NoWinner);
+        SwitchPlayer();
     }
 }
 
+function PlayerWon() {
+    $("#display-message").text("Player " + playerTurn + " has won!");
+    $("#reset").show();
+    $(".square").off("click");
+}
 
-function DetermineNextTurn(isGameOver, NoWinner) {
-    if (isGameOver === "true") {
-
-        //Board is full, no winner
-        if (NoWinner === "true") {
-            $("#display-message").text("It's a draw!");
-            $("#reset").show();
-            $(".square").off("click");
-        }
-        //A player has won
-        else {
-            $("#display-message").text("Player " + playerTurn + " has won!");
-            $("#reset").show();
-            $(".square").off("click");
-        }
-    }
-    //Continue to next turn
-    else {
-        SwitchPlayer();
-    }
+function PlayersTied() {
+    $("#display-message").text("It's a draw!");
+    $("#reset").show();
+    $(".square").off("click");
 }
