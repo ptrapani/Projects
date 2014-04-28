@@ -10,14 +10,8 @@ function InitializeGame() {
 
 function SquareClickEvent() {
     if ($(this).text() === "") {
-        if (playerTurn === 1) {
-            $(this).text(playerSymbol);
-            CheckWinner();
-
-        } else {
-            $(this).text(playerSymbol);
-            CheckWinner();
-        }
+        $(this).text(playerSymbol);
+        CheckWinner();
     } else {
         $("#display-message").text("Not a valid move");
     }
