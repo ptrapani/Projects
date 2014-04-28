@@ -1,18 +1,19 @@
 <div id="board">
     <div id="row1">
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
+        <div class="square col1"></div>
+        <div class="square col2"></div>
+        <div class="square col3"></div>
     </div>
     <div id="row2">
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
+        <div class="square col1"></div>
+        <div class="square col2"></div>
+        <div class="square col3"></div>
     </div>
     <div id="row3">
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
+        <div class="square col1"></div>
+        <div class="square col2"></div>
+        <div class="square col3"></div>
     </div>
     <div id="display-message"></div>
+    <div id="reset">Reset game</div>
 </div>
