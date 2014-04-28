@@ -1,11 +1,12 @@
-//TO DO: makes these init values their own function.  Might need to make variables global though or namespace or properties of the methods
+InitializeGame();
 
-var playerTurn = 1;
-var playerSymbol = "X";
-var IsGameOver = "false";
-$("#display-message").text("Player " + playerTurn + "'s Turn");
-
-$(".square").on("click", squareClickEvent);
+function InitializeGame() {
+    window.playerTurn = 1;
+    window.playerSymbol = "X";
+    $(".square").text("");
+    $(".square").on("click", squareClickEvent);
+    $("#display-message").text("Player " + playerTurn + "'s Turn");
+}
 
 function squareClickEvent() {
     if ($(this).text() === "") {
@@ -23,11 +24,10 @@ function squareClickEvent() {
 }
 
 $("#reset").on("click", function () {
-    RestartGame();
+    InitializeGame();
 });
 
 function SwitchPlayer() {
-    //Switch turns
     if (playerTurn === 1) {
         playerTurn = 2;
         playerSymbol = "O";
@@ -103,13 +103,4 @@ function DetermineNextTurn(isGameOver, NoWinner) {
     else {
         SwitchPlayer();
     }
-}
-
-function RestartGame() {
-    playerTurn = 1;
-    playerSymbol = "X";
-    IsGameOver = "false";
-    $(".square").text("");
-    $(".square").on("click", squareClickEvent);
-    $("#display-message").text("Player " + playerTurn + "'s Turn");
 }
