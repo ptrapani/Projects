@@ -1,0 +1,9 @@
+#board {
+    width:600px;
+}
+.square {
+    width:33%;
+    float:left;
+    border:1px solid black;
+    height:100px;
+}
