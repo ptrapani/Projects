@@ -1,4 +1,5 @@
  var playerTurn = 1;
+ var playerSymbol = "X";
  var IsGameOver = "false";
  $("#display-message").text("Player " + playerTurn + "'s Turn");
 
@@ -7,11 +8,11 @@
 
      if ($(this).text() === "") {
          if (playerTurn === 1) {
-             $(this).text("X");
+             $(this).text(playerSymbol);
              CheckWinner();
 
          } else {
-             $(this).text("O");
+             $(this).text(playerSymbol);
              CheckWinner();
          }
      } else {
@@ -20,13 +21,14 @@
  });
 
 
-
  function Main() {
      //Switch turns
      if (playerTurn === 1) {
          playerTurn = 2;
+         playerSymbol = "O";
      } else {
          playerTurn = 1;
+         playerSymbol = "X";
      }
 
      $("#display-message").text("Player " + playerTurn + "'s Turn");
@@ -37,18 +39,28 @@
      var isGameOver = "false";
      var NoWinner = "true";
 
-     //If all 9 have been filled and no winner then game is over
-     //traverse through board to determine if 3 in a row
+     //Traverse through board to determine if 3 in a row
+     //Only check for current player
 
+
+     DetermineNextTurn(isGameOver, NoWinner);
+ }
+
+
+ function DetermineNextTurn(isGameOver, NoWinner) {
      if (isGameOver === "true") {
-         //Either display Winner or board is full
+
+         //Board is full, no winner
          if (NoWinner === "true") {
-             $("#display-message").text("No winner, game is over");
-         } else {
+             $("#display-message").text("It's a draw!");
+             //Reset button displays            
+         }
+         //A player has won
+         else {
              $("#display-message").text("Player " + playerTurn + " has won!");
          }
      }
-     //Game isn't over, next turn
+     //Continue to next turn
      else {
          Main();
      }
