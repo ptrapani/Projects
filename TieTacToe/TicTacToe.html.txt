@@ -14,6 +14,6 @@
         <div class="square col2"></div>
         <div class="square col3"></div>
     </div>
-    <div id="display-message"></div>
-    <div id="reset">Reset game</div>
 </div>
+<div id="display-message"></div>
+<div id="reset">Reset game</div>

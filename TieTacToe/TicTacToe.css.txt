@@ -7,7 +7,23 @@
     border:1px solid black;
     height:100px;
     cursor:pointer;
+    text-align:center;
+    font-size: 85px;
 }
 #reset {
     display:none;
+    cursor:pointer;
+    border:1px solid black;
+    border-radius:5px;
+    width:85px;
+    padding:5px;
+    margin-left: 270px;
+    margin-top: 14px;
+    font-size: 18px;
+}
+#display-message {
+    font-size:30px;
+    padding-top:18px;
+    margin-left:206px;
+    clear:both;
 }

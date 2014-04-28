@@ -41,9 +41,8 @@ function SwitchPlayer() {
 function CheckWinner() {
     var isGameOver = "false";
     var NoWinner = "true";
-    var winningCombo = playerSymbol += playerSymbol += playerSymbol;
+    var winningCombo = playerSymbol + playerSymbol + playerSymbol;
 
-    //Traverse through board to determine if 3 in a row
     //Only check for current player
 
     //Check horizontal
@@ -59,7 +58,18 @@ function CheckWinner() {
         NoWinner = "false";
     }
 
+
     //Check Diagonal
+    if (playerSymbol === $("#row1 .col1").text() && playerSymbol === $("#row2 .col2").text() && playerSymbol === $("#row3 .col3").text()) {
+        isGameOver = "true";
+        NoWinner = "false";
+    }
+
+    if (playerSymbol === $("#row1 .col3").text() && playerSymbol === $("#row2 .col2").text() && playerSymbol === $("#row3 .col1").text()) {
+        isGameOver = "true";
+        NoWinner = "false";
+    }
+
 
     DetermineNextTurn(isGameOver, NoWinner);
 }
@@ -72,13 +82,13 @@ function DetermineNextTurn(isGameOver, NoWinner) {
         if (NoWinner === "true") {
             $("#display-message").text("It's a draw!");
             $("#reset").show();
-            //TO DO: Make board inactive         
+            $(".square").off("click");
         }
         //A player has won
         else {
             $("#display-message").text("Player " + playerTurn + " has won!");
             $("#reset").show();
-            //TO DO: Make board inactive
+            $(".square").off("click");
         }
     }
     //Continue to next turn
