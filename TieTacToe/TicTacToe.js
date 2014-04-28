@@ -1,17 +1,17 @@
 InitializeGame();
 
 function InitializeGame() {
-    window.playerTurn = 1;
-    window.playerSymbol = "X";
+    window.player = "1";
     $(".square").text("");
     $(".square").on("click", SquareClickEvent);
-    $("#display-message").text("Player " + playerTurn + "'s Turn");
+    $("#display-message").text("Player " + player + "'s Turn");
 }
 
 function SquareClickEvent() {
     if ($(this).text() === "") {
+        var playerSymbol = (player === "1") ? "X" : "O";
         $(this).text(playerSymbol);
-        CheckWinner();
+        CheckWinner(playerSymbol);
     } else {
         $("#display-message").text("Not a valid move");
     }
@@ -22,18 +22,12 @@ $("#reset").on("click", function () {
 });
 
 function SwitchPlayer() {
-    if (playerTurn === 1) {
-        playerTurn = 2;
-        playerSymbol = "O";
-    } else {
-        playerTurn = 1;
-        playerSymbol = "X";
-    }
-
-    $("#display-message").text("Player " + playerTurn + "'s Turn");
+    player = (player === "1") ? "2" : "1";
+    $("#display-message").text("Player " + player + "'s Turn");
 }
 
-function CheckWinner() {
+function CheckWinner(playerSymbol) {
+
     var winningCombo = playerSymbol + playerSymbol + playerSymbol;
 
     //Check horizontal
@@ -62,7 +56,7 @@ function CheckWinner() {
 }
 
 function PlayerWon() {
-    $("#display-message").text("Player " + playerTurn + " has won!");
+    $("#display-message").text("Player " + player + " has won!");
     $("#reset").show();
     $(".square").off("click");
 }
