@@ -49,29 +49,41 @@ function CheckWinner() {
     if (winningCombo === $("#row1 .square").text() || winningCombo === $("#row2 .square").text() || winningCombo === $("#row3 .square").text()) {
         isGameOver = "true";
         NoWinner = "false";
+        DetermineNextTurn(isGameOver, NoWinner);
     }
 
 
     //Check vertical. 
-    if (winningCombo === $(".col1").text() || winningCombo === $(".col2").text() || winningCombo === $(".col3").text()) {
+    else if (winningCombo === $(".col1").text() || winningCombo === $(".col2").text() || winningCombo === $(".col3").text()) {
         isGameOver = "true";
         NoWinner = "false";
+        DetermineNextTurn(isGameOver, NoWinner);
     }
 
 
     //Check Diagonal
-    if (playerSymbol === $("#row1 .col1").text() && playerSymbol === $("#row2 .col2").text() && playerSymbol === $("#row3 .col3").text()) {
+    else if (playerSymbol === $("#row1 .col1").text() && playerSymbol === $("#row2 .col2").text() && playerSymbol === $("#row3 .col3").text()) {
         isGameOver = "true";
         NoWinner = "false";
+        DetermineNextTurn(isGameOver, NoWinner);
     }
-
-    if (playerSymbol === $("#row1 .col3").text() && playerSymbol === $("#row2 .col2").text() && playerSymbol === $("#row3 .col1").text()) {
+    
+    else if (playerSymbol === $("#row1 .col3").text() && playerSymbol === $("#row2 .col2").text() && playerSymbol === $("#row3 .col1").text()) {
         isGameOver = "true";
         NoWinner = "false";
+        DetermineNextTurn(isGameOver, NoWinner);
     }
 
-
-    DetermineNextTurn(isGameOver, NoWinner);
+    //Board is full and nobody has won
+    else if ($(".square").text().length === 9) {
+        isGameOver = "true";
+        NoWinner = "true";
+        DetermineNextTurn(isGameOver, NoWinner);
+    } 
+    
+    else {
+        DetermineNextTurn(isGameOver, NoWinner);
+    }
 }
 
 
