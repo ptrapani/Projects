@@ -5,7 +5,9 @@ var playerSymbol = "X";
 var IsGameOver = "false";
 $("#display-message").text("Player " + playerTurn + "'s Turn");
 
-$(".square").click(function () {
+$(".square").on("click", squareClickEvent);
+
+function squareClickEvent() {
     if ($(this).text() === "") {
         if (playerTurn === 1) {
             $(this).text(playerSymbol);
@@ -18,7 +20,7 @@ $(".square").click(function () {
     } else {
         $("#display-message").text("Not a valid move");
     }
-});
+}
 
 $("#reset").on("click", function () {
     RestartGame();
@@ -43,8 +45,6 @@ function CheckWinner() {
     var NoWinner = "true";
     var winningCombo = playerSymbol + playerSymbol + playerSymbol;
 
-    //Only check for current player
-
     //Check horizontal
     if (winningCombo === $("#row1 .square").text() || winningCombo === $("#row2 .square").text() || winningCombo === $("#row3 .square").text()) {
         isGameOver = "true";
@@ -66,9 +66,7 @@ function CheckWinner() {
         isGameOver = "true";
         NoWinner = "false";
         DetermineNextTurn(isGameOver, NoWinner);
-    }
-    
-    else if (playerSymbol === $("#row1 .col3").text() && playerSymbol === $("#row2 .col2").text() && playerSymbol === $("#row3 .col1").text()) {
+    } else if (playerSymbol === $("#row1 .col3").text() && playerSymbol === $("#row2 .col2").text() && playerSymbol === $("#row3 .col1").text()) {
         isGameOver = "true";
         NoWinner = "false";
         DetermineNextTurn(isGameOver, NoWinner);
@@ -79,9 +77,7 @@ function CheckWinner() {
         isGameOver = "true";
         NoWinner = "true";
         DetermineNextTurn(isGameOver, NoWinner);
-    } 
-    
-    else {
+    } else {
         DetermineNextTurn(isGameOver, NoWinner);
     }
 }
@@ -110,8 +106,10 @@ function DetermineNextTurn(isGameOver, NoWinner) {
 }
 
 function RestartGame() {
-    //Clear board and make it player 1's turn
-    //Might not even need this actually
-    //TO DO: Empty out all the squares so that reset works   
-    //InitNewGame();
+    playerTurn = 1;
+    playerSymbol = "X";
+    IsGameOver = "false";
+    $(".square").text("");
+    $(".square").on("click", squareClickEvent);
+    $("#display-message").text("Player " + playerTurn + "'s Turn");
 }
